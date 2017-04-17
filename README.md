@@ -135,3 +135,50 @@ d74e0c332e5dc0faf002c83e60d87f069c24df0f 修改了README.md
 90e71a145c94df249cb77b118b1de7b159bbd0e7 Initial commit
 ```
 
+
+
+需要友情提示的是，你看到的一大串类似`3628164...882e1e0`的是`commit id`（版本号），和SVN不一样，Git的`commit id`不是1，2，3……递增的数字，而是一个SHA1计算出来的一个非常大的数字，用十六进制表示，而且你看到的`commit id`和我的肯定不一样，以你自己的为准。为什么`commit id`需要用这么一大串数字表示呢？因为Git是分布式的版本控制系统，后面我们还要研究多人在同一个版本库里工作，如果大家都用1，2，3……作为版本号，那肯定就冲突了。
+
+每提交一个新版本，实际上Git就会把它们自动串成一条时间线。如果使用可视化工具查看Git历史，就可以更清楚地看到提交历史的时间线：
+
+
+
+首先，Git必须知道当前版本是哪个版本，在Git中，用`HEAD`表示当前版本，也就是最新的提交`3628164...882e1e0`（注意我的提交ID和你的肯定不一样），上一个版本就是`HEAD^`，上上一个版本就是`HEAD^^`，当然往上100个版本写100个`^`比较容易数不过来，所以写成`HEAD~100`。
+
+```
+dingqi:Git dllo$ git reset --hard 5ede58054
+HEAD is now at 5ede580 修改了README
+dingqi:Git dllo$ git log --pretty=oneline
+5ede58054e0db6fbea4192fbd3852bfd45502da2 修改了README
+d74e0c332e5dc0faf002c83e60d87f069c24df0f 修改了README.md
+90e71a145c94df249cb77b118b1de7b159bbd0e7 Initial commit
+
+```
+
+只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个`append GPL`的`commit id`是`3628164...`，于是就可以指定回到未来的某个版本：
+
+```
+dingqi:Git dllo$ git reflog
+5ede580 HEAD@{0}: reset: moving to 5ede58054
+b09a2d4 HEAD@{1}: commit: 再一次修改le
+5ede580 HEAD@{2}: commit: 修改了README
+d74e0c3 HEAD@{3}: commit: 修改了README.md
+```
+
+从git reflog 就能看到你历史修改的id  想恢复哪个就可以找到相应的id.
+
+```
+dingqi:Git dllo$ git reset --hard b09a2d4
+HEAD is now at b09a2d4 再一次修改le
+dingqi:Git dllo$ git log --pretty=online
+fatal: invalid --pretty format: online
+dingqi:Git dllo$ git log --pretty=oneline
+b09a2d4780f048c0f1de35951c782a457ded9460 再一次修改le
+5ede58054e0db6fbea4192fbd3852bfd45502da2 修改了README
+d74e0c332e5dc0faf002c83e60d87f069c24df0f 修改了README.md
+90e71a145c94df249cb77b118b1de7b159bbd0e7 Initial commit
+```
+
+我又将之间休改的版本找了回来~是不是很神奇啊~
+
+然后就是讲这几个新的命令重新git push.
