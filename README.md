@@ -89,3 +89,49 @@ git push
 
 如果pull request 没有通过,你下次push依旧会保存在该push request 中
 
+
+
+
+
+##### 版本回退
+
+1.在实际工作中，我们脑子里怎么可能记得一个几千行的文件每次都改了什么内容，不然要版本控制系统干什么。版本控制系统肯定有某个命令可以告诉我们历史记录，在Git中，我们用`git log`命令查看：
+
+```
+commit b09a2d4780f048c0f1de35951c782a457ded9460
+Author: dllo <dllo@dingqi.local>
+Date:   Mon Apr 17 17:21:40 2017 +0800
+
+    再一次修改le
+
+commit 5ede58054e0db6fbea4192fbd3852bfd45502da2
+Author: dllo <dllo@dingqi.local>
+Date:   Mon Apr 17 16:52:42 2017 +0800
+
+    修改了README
+
+commit d74e0c332e5dc0faf002c83e60d87f069c24df0f
+Author: dllo <dllo@dingqi.local>
+Date:   Mon Apr 17 16:01:19 2017 +0800
+
+    修改了README.md
+
+commit 90e71a145c94df249cb77b118b1de7b159bbd0e7
+Author: QC-L <liqichang_4869@163.com>
+Date:   Mon Apr 17 15:27:00 2017 +0800
+
+    Initial commit
+
+```
+
+`git log`命令显示从最近到最远的提交日志，我们可以看到3次提交，最近的一次是`append GPL`，上一次是`add distributed`，最早的一次是`wrote a readme file`。
+如果嫌输出信息太多，看得眼花缭乱的，可以试试加上`--pretty=oneline`参数：
+
+```
+dingqi:Git dllo$ git log --pretty=oneline
+b09a2d4780f048c0f1de35951c782a457ded9460 再一次修改le
+5ede58054e0db6fbea4192fbd3852bfd45502da2 修改了README
+d74e0c332e5dc0faf002c83e60d87f069c24df0f 修改了README.md
+90e71a145c94df249cb77b118b1de7b159bbd0e7 Initial commit
+```
+
