@@ -179,6 +179,6 @@ d74e0c332e5dc0faf002c83e60d87f069c24df0f 修改了README.md
 90e71a145c94df249cb77b118b1de7b159bbd0e7 Initial commit
 ```
 
-我又将之间休改的版本找了回来~是不是很神奇啊~
+我又将之间休改的版本找了回来 是不是很神奇啊
 
 然后就是讲这几个新的命令重新git push.
